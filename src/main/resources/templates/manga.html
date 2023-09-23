@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manga</title>
+</head>
+<body>
+<table>
+
+</table>
+<h1>Список манги</h1>
+<table>
+    <tr>
+        <th>Картинка</th>
+        <th>Тайтл</th>
+        <th>Описание</th>
+        <th>Действия</th>
+    </tr>
+    <tr th:each="manga, index : ${mangaList}">
+        <td><img th:src="${index.imageUrl}" alt="Картинка манги" /></td>
+        <td th:text="${manga.title}"></td>
+        <td th:text="${manga.description}"></td>
+        <td>
+            <form th:action="@{/manga/delete/{index}(index=${index})}" method="get">
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<h2>Добавить мангу</h2>
+<form th:action="@{/manga/add}" method="post">
+    <label for="title">Тайтл:</label>
+    <input type="text" id="title" name="title" required /><br/>
+    <label for="description">Описание:</label>
+    <input type="text" id="description" name="description" required /><br/>
+    <label for="imageUrl">URL изображения:</label>
+    <input type="text" id="imageUrl" name="imageUrl" required /><br/>
+    <button type="submit">Добавить</button>
+</form>
+
+</body>
+</html>
